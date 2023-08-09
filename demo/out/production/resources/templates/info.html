@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>키오스크 연습 앱</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .main-container {
+            width: 784px;
+            height: 778px;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+
+        .title-box {
+            width: 70%;
+            height: 200px;
+            background-color: #fff;
+            border: 2px solid #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        .action-box {
+            display: flex;
+            gap: 20px;
+        }
+
+        .action-button {
+            width: 150px;
+            height: 50px;
+            background-color: #333;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+        .selected {
+            background-color: lightgray;
+        }
+        .age-group-box {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .gender-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center; /* 중앙 정렬 */
+        }
+
+
+    </style>
+
+    <script>
+        let selectedAge = null;
+        let selectedGender = null;
+
+        function handleAgeClick(age) {
+            if (selectedAge !== age) {
+                if (selectedAge) {
+                    document.getElementById('age-' + selectedAge).classList.remove('selected');
+                }
+                selectedAge = age;
+                document.getElementById('age-' + age).classList.add('selected');
+                checkAndEnableSubmit();
+            }
+        }
+
+        function handleGenderClick(gender) {
+            if (selectedGender !== gender) {
+                if (selectedGender) {
+                    document.getElementById('gender-' + selectedGender).classList.remove('selected');
+                }
+                selectedGender = gender;
+                document.getElementById('gender-' + gender).classList.add('selected');
+                checkAndEnableSubmit();
+            }
+        }
+
+        function checkAndEnableSubmit() {
+            const submitButton = document.getElementById('submit-button');
+            if (selectedAge !== null && selectedGender !== null) {
+                submitButton.disabled = false;
+            } else {
+                submitButton.disabled = true;
+            }
+        }
+
+        function redirectToNextPage() {
+            const selectedAge = selectedAge;
+            const selectedGender = selectedGender;
+
+            if (selectedAge && selectedGender) {
+                const nextUrl = `/nextPage?age=${selectedAge}&gender=${selectedGender}`;
+                window.location.href = nextUrl;
+            }
+        }
+
+    </script>
+</head>
+<body>
+<div class="main-container">
+    <div class="title-box">
+        키오스크 연습 앱
+    </div>
+    <div class="action-box">
+        <form action="/home/save" method="post">
+            <div class="age-group-box">
+                <div class="age-selection">
+                    <label>나이대 선택:</label>
+                    <select name="ageGroup">
+                        <option value="20">20대</option>
+                        <option value="30">30대</option>
+                        <option value="40">40대</option>
+                        <option value="50">50대</option>
+                        <option value="60">60대</option>
+                        <option value="70">70대</option>
+                        <option value="80">80대</option>
+                        <option value="90">90대</option>
+                    </select>
+                </div>
+                <div class="gender-selection">
+                    <label>성별 선택:</label>
+                    <input type="radio" name="gender" value="male"> 남성
+                    <input type="radio" name="gender" value="female"> 여성
+                </div>
+            </div>
+            <button type="submit">선택 완료</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

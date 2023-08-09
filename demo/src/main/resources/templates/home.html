@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>키오스크 연습 앱</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .main-container {
+            width: 784px;
+            height: 778px;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+
+        .title-box {
+            width: 70%;
+            height: 200px;
+            background-color: #fff;
+            border: 2px solid #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        .action-box {
+            display: flex;
+            gap: 20px;
+        }
+
+        .action-button {
+            width: 200px;
+            height: 80px;
+            background-color: #333;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+    </style>
+
+</head>
+<body>
+<div class="main-container">
+    <div class="title-box">
+        키오스크 연습 앱
+    </div>
+    <div class="action-box">
+        <a href="/home/info" class="action-button">연습하기</a>
+        <a href="/home/tutorial" class="action-button">처음이신가요</a>
+    </div>
+</div>
+</body>
+</html>
