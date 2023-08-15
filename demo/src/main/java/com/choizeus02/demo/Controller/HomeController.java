@@ -1,5 +1,8 @@
 package com.choizeus02.demo.Controller;
 
+import com.choizeus02.demo.domain.Member;
+import com.choizeus02.demo.repository.DataMemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -9,6 +12,10 @@ import org.springframework.ui.Model;
 
 @Controller
 public class HomeController {
+
+
+    @Autowired
+    private DataMemberRepository memberRepository;
 
     @GetMapping("/")
     public String home() {
@@ -30,6 +37,11 @@ public class HomeController {
     public String save(@ModelAttribute("memberForm") MemberForm form, Model model) {
         model.addAttribute("ageGroup", form.getAgeGroup());
         model.addAttribute("gender", form.getGender());
+        Member member = new Member();
+        member.setAgeGroup(form.getAgeGroup());
+        member.setGender(form.getGender());
+
+        memberRepository.save(member);
         return "game/korail/KorailIndex"; // 선택 완료 후 홈 페이지로 이동
     }
 
